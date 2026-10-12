@@ -10,6 +10,7 @@
 	Правила = Новый Массив;
 
 	ДобавитьПравилаФайловойСистемы(Правила);
+	ДобавитьПравилаПроцессов(Правила);
 	ДобавитьПравилаПотоков(Правила);
 	ДобавитьПравилаJSON(Правила);
 	ДобавитьПравилаXML(Правила);
@@ -141,6 +142,43 @@
 		"",
 		КодыНативныхОшибок.ФайловаяСистемаРесурсНеНайден(),
 		СообщениеРесурсНеНайден
+	);
+
+КонецПроцедуры
+
+Процедура ДобавитьПравилаПроцессов(Правила)
+
+	ДобавитьПравило(
+		Правила,
+		"process.executable_not_found",
+		СпособыСопоставленияНативныхОшибок.ТипИОбрамление(),
+		"System.ComponentModel.Win32Exception",
+		"An error occurred trying to start process '",
+		"ru = 'Не удается найти указанный файл.'; en = 'The system cannot find the file specified.'",
+		КодыНативныхОшибок.ПроцессИсполняемыйФайлНеНайден(),
+		"ru = 'Исполняемый файл приложения не найден'; en = 'Application executable was not found'"
+	);
+	ДобавитьПравило(
+		Правила,
+		"process.executable_not_found.unix",
+		СпособыСопоставленияНативныхОшибок.ТипИОбрамление(),
+		"System.ComponentModel.Win32Exception",
+		"An error occurred trying to start process '",
+		"ru = 'Нет такого файла или каталога'; en = 'No such file or directory'",
+		КодыНативныхОшибок.ПроцессИсполняемыйФайлНеНайден(),
+		"ru = 'Исполняемый файл приложения не найден'; "
+			+ "en = 'Application executable was not found'"
+	);
+	ДобавитьПравило(
+		Правила,
+		"process.exit_code_unavailable",
+		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		"System.InvalidOperationException",
+		"",
+		"Process must exit before requested information can be determined.",
+		КодыНативныхОшибок.ПроцессКодВозвратаНедоступен(),
+		"ru = 'Код возврата недоступен до завершения процесса'; "
+			+ "en = 'Exit code is unavailable until the process exits'"
 	);
 
 КонецПроцедуры
