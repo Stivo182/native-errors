@@ -51,15 +51,17 @@
 
 	ДобавитьПравило(
 		Правила,
+		"filesystem.access_denied",
 		СпособыСопоставленияНативныхОшибок.ПоТипу(),
 		"System.UnauthorizedAccessException",
 		"",
 		"",
 		КодыНативныхОшибок.ФайловаяСистемаДоступЗапрещен(),
-		"ru = 'Доступ к файлу или каталогу запрещён'; en = 'Access to file or directory is denied'"
+		"ru = 'Доступ к файлу или каталогу запрещен'; en = 'Access to file or directory is denied'"
 	);
 	ДобавитьПравило(
 		Правила,
+		"filesystem.already_exists.file_path",
 		СпособыСопоставленияНативныхОшибок.ТипИОбрамление(),
 		"System.IO.IOException",
 		"ru = 'Файл '''; en = 'The file '''",
@@ -69,6 +71,28 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"filesystem.already_exists.directory_path",
+		СпособыСопоставленияНативныхОшибок.ТипИОбрамление(),
+		"System.IO.IOException",
+		"Cannot create '",
+		"' because a file or directory with the same name already exists.",
+		КодыНативныхОшибок.ФайловаяСистемаРесурсУжеСуществует(),
+		"ru = 'Файл или каталог уже существует'; en = 'File or directory already exists'"
+	);
+	ДобавитьПравило(
+		Правила,
+		"filesystem.already_exists.file_win32",
+		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		"System.IO.IOException",
+		"",
+		"ru = 'Невозможно создать файл, так как он уже существует.';"
+			+ "en = 'Cannot create a file when that file already exists.'",
+		КодыНативныхОшибок.ФайловаяСистемаРесурсУжеСуществует(),
+		"ru = 'Файл уже существует'; en = 'File already exists'"
+	);
+	ДобавитьПравило(
+		Правила,
+		"filesystem.resource_busy",
 		СпособыСопоставленияНативныхОшибок.ТипИОбрамление(),
 		"System.IO.IOException",
 		"ru = 'Процесс не может получить доступ к файлу ''';"
@@ -80,6 +104,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"filesystem.not_found.file_type",
 		СпособыСопоставленияНативныхОшибок.ПоТипу(),
 		"System.IO.FileNotFoundException",
 		"",
@@ -89,6 +114,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"filesystem.not_found.directory_type",
 		СпособыСопоставленияНативныхОшибок.ПоТипу(),
 		"System.IO.DirectoryNotFoundException",
 		"",
@@ -98,6 +124,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"filesystem.not_found.file_message",
 		СпособыСопоставленияНативныхОшибок.Префикс(),
 		"",
 		"Could not find file '",
@@ -107,6 +134,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"filesystem.not_found.directory_message",
 		СпособыСопоставленияНативныхОшибок.Префикс(),
 		"",
 		"Could not find a part of the path '",
@@ -121,6 +149,17 @@
 
 	ДобавитьПравило(
 		Правила,
+		"stream.not_readable",
+		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		"System.ArgumentException",
+		"",
+		"Stream was not readable.",
+		КодыНативныхОшибок.ПотокНедоступенДляЧтения(),
+		"ru = 'Поток недоступен для чтения'; en = 'Stream is not readable'"
+	);
+	ДобавитьПравило(
+		Правила,
+		"stream.not_writable",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Попытка записи в поток не поддерживающий запись';"
@@ -131,6 +170,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"stream.closed.onescript",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Ошибка обращения к закрытому потоку'; en = 'Cannot access a closed stream'",
@@ -140,6 +180,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"stream.closed.dotnet_stream",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.ObjectDisposedException",
 		"",
@@ -149,6 +190,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"stream.closed.dotnet_file",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.ObjectDisposedException",
 		"",
@@ -158,6 +200,17 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"stream.closed.tcp_client",
+		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		"System.ObjectDisposedException",
+		"",
+		"Object name: 'System.Net.Sockets.TcpClient'.",
+		КодыНативныхОшибок.ПотокЗакрыт(),
+		"ru = 'Поток закрыт'; en = 'Stream is closed'"
+	);
+	ДобавитьПравило(
+		Правила,
+		"stream.buffer_range",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.ArgumentOutOfRangeException",
 		"",
@@ -168,6 +221,16 @@
 		"ru = 'Диапазон буфера выходит за допустимые границы';"
 			+ "en = 'Buffer range is outside the allowed bounds'"
 	);
+	ДобавитьПравило(
+		Правила,
+		"stream.timeout_not_supported",
+		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		"System.InvalidOperationException",
+		"",
+		"Timeouts are not supported on this stream.",
+		КодыНативныхОшибок.ПотокНеПоддерживаетТаймауты(),
+		"ru = 'Поток не поддерживает таймауты'; en = 'Stream does not support timeouts'"
+	);
 
 КонецПроцедуры
 
@@ -175,6 +238,27 @@
 
 	ДобавитьПравило(
 		Правила,
+		"json.invalid_syntax.jobject",
+		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
+		"Newtonsoft.Json.JsonReaderException",
+		"Error reading JObject from JsonReader. Path '",
+		"",
+		КодыНативныхОшибок.JSONНекорректныйСинтаксис(),
+		"ru = 'Некорректные данные JSON'; en = 'Invalid JSON data'"
+	);
+	ДобавитьПравило(
+		Правила,
+		"json.invalid_write_state",
+		СпособыСопоставленияНативныхОшибок.ПоТипу(),
+		"Newtonsoft.Json.JsonWriterException",
+		"",
+		"",
+		КодыНативныхОшибок.JSONНекорректноеСостояниеЗаписи(),
+		"ru = 'Недопустимая операция записи JSON'; en = 'Invalid JSON writing operation'"
+	);
+	ДобавитьПравило(
+		Правила,
+		"json.reader_not_open",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Источник данных JSON не открыт'; en = 'JSON data source is not opened'",
@@ -184,6 +268,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"json.writer_not_open",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Приемник данных JSON не открыт'; en = 'JSON data target is not opened'",
@@ -193,6 +278,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"json.current_value_unavailable",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Текущее значение JSON не может быть получено'; en = 'Cannot get current JSON value'",
@@ -202,15 +288,17 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"json.unsupported_date_format",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Формат даты JavaScript не поддерживается.'; en = 'JavaScript date format is not supported'",
 		"",
 		КодыНативныхОшибок.JSONФорматДатыНеПоддерживается(),
-		"ru = 'Формат даты JSON не поддерживается'; en = 'JSON date format is not supported'"
+		"ru = 'Выбранный формат даты не поддерживается'; en = 'Selected date format is not supported'"
 	);
 	ДобавитьПравило(
 		Правила,
+		"json.invalid_date_presentation",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Представление даты имеет неверный формат.';"
@@ -222,28 +310,29 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"json.local_date.javascript",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Невозможно сохранить локальную дату в формате JavaScript';"
 			+ "en = 'Cannot save local date in JavaScript format'",
 		"",
 		КодыНативныхОшибок.JSONЛокальнаяДатаНеПоддерживается(),
-		"ru = 'Локальная дата не поддерживается форматом JSON';"
-			+ "en = 'Local date is not supported by the JSON format'"
+		"ru = 'Выбранный формат даты требует UTC'; en = 'Selected date format requires UTC'"
 	);
 	ДобавитьПравило(
 		Правила,
+		"json.local_date.microsoft",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Невозможно сохранить локальную дату в формате Microsoft';"
 			+ "en = 'Cannot save local date in Microsoft format'",
 		"",
 		КодыНативныхОшибок.JSONЛокальнаяДатаНеПоддерживается(),
-		"ru = 'Локальная дата не поддерживается форматом JSON';"
-			+ "en = 'Local date is not supported by the JSON format'"
+		"ru = 'Выбранный формат даты требует UTC'; en = 'Selected date format requires UTC'"
 	);
 	ДобавитьПравило(
 		Правила,
+		"json.unsupported_value_type",
 		СпособыСопоставленияНативныхОшибок.ПрефиксОкончание(),
 		"",
 		"ru = 'Запись значения типа '; en = 'Cannot write value of type '",
@@ -254,6 +343,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"json.invalid_syntax.reader_state",
 		СпособыСопоставленияНативныхОшибок.Префикс(),
 		"",
 		"ru = 'Недопустимое состояние потока чтения JSON в строке';"
@@ -264,6 +354,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"json.invalid_syntax.unexpected_symbol",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Непредвиденный символ при чтении JSON';"
@@ -277,8 +368,85 @@
 
 Процедура ДобавитьПравилаXML(Правила)
 
+	СообщениеСостоянияЗаписи = "ru = 'Нарушен порядок операций записи XML';"
+		+ "en = 'Invalid order of XML writing operations'";
+	СообщениеСинтаксиса = "ru = 'Некорректные данные XML'; en = 'Invalid XML data'";
+	СообщениеПредставления = "ru = 'Некорректное XML-представление значения';"
+		+ "en = 'Invalid XML value representation'";
+
 	ДобавитьПравило(
 		Правила,
+		"xml.invalid_write_state.no_start_tag",
+		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		"System.InvalidOperationException",
+		"",
+		"There was no XML start tag open.",
+		КодыНативныхОшибок.XMLНекорректноеСостояниеЗаписи(),
+		СообщениеСостоянияЗаписи
+	);
+	ДобавитьПравило(
+		Правила,
+		"xml.invalid_write_state.end_attribute",
+		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		"System.InvalidOperationException",
+		"",
+		"Token EndAttribute in state Start would result in an invalid XML document.",
+		КодыНативныхОшибок.XMLНекорректноеСостояниеЗаписи(),
+		СообщениеСостоянияЗаписи
+	);
+	ДобавитьПравило(
+		Правила,
+		"xml.invalid_write_state.start_document",
+		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		"System.InvalidOperationException",
+		"",
+		"WriteStartDocument needs to be the first call.",
+		КодыНативныхОшибок.XMLНекорректноеСостояниеЗаписи(),
+		СообщениеСостоянияЗаписи
+	);
+	ДобавитьПравило(
+		Правила,
+		"xml.invalid_syntax.cdata",
+		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		"System.ArgumentException",
+		"",
+		"Cannot have ']]>' inside an XML CDATA block.",
+		КодыНативныхОшибок.XMLНекорректныйСинтаксис(),
+		СообщениеСинтаксиса
+	);
+	ДобавитьПравило(
+		Правила,
+		"xml.invalid_syntax.comment",
+		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		"System.ArgumentException",
+		"",
+		"An XML comment cannot contain '--', and '-' cannot be the last character.",
+		КодыНативныхОшибок.XMLНекорректныйСинтаксис(),
+		СообщениеСинтаксиса
+	);
+	ДобавитьПравило(
+		Правила,
+		"xml.invalid_value.boolean",
+		СпособыСопоставленияНативныхОшибок.ТипИОбрамление(),
+		"System.FormatException",
+		"The string '",
+		"' is not a valid Boolean value.",
+		КодыНативныхОшибок.XMLНекорректноеПредставлениеЗначения(),
+		СообщениеПредставления
+	);
+	ДобавитьПравило(
+		Правила,
+		"xml.invalid_value.date",
+		СпособыСопоставленияНативныхОшибок.ТипИОбрамление(),
+		"System.FormatException",
+		"The string '",
+		"' is not a valid AllXsd value.",
+		КодыНативныхОшибок.XMLНекорректноеПредставлениеЗначения(),
+		СообщениеПредставления
+	);
+	ДобавитьПравило(
+		Правила,
+		"xml.writer_not_open",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Приемник данных XML не открыт'; en = 'XML data target is not opened'",
@@ -288,15 +456,17 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"xml.invalid_write_state.write_order",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Ошибочный порядок записи XML'; en = 'Wrong order of XML record'",
 		"",
 		КодыНативныхОшибок.XMLНекорректноеСостояниеЗаписи(),
-		"ru = 'Нарушен порядок операций записи XML'; en = 'Invalid order of XML writing operations'"
+		СообщениеСостоянияЗаписи
 	);
 	ДобавитьПравило(
 		Правила,
+		"xml.system_id_missing",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Отсутствует системный идентификатор'; en = 'System ID missing'",
@@ -306,15 +476,17 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"xml.invalid_syntax.xml_exception",
 		СпособыСопоставленияНативныхОшибок.ПоТипу(),
 		"System.Xml.XmlException",
 		"",
 		"",
 		КодыНативныхОшибок.XMLНекорректныйСинтаксис(),
-		"ru = 'Некорректные данные XML'; en = 'Invalid XML data'"
+		СообщениеСинтаксиса
 	);
 	ДобавитьПравило(
 		Правила,
+		"xml.schema_duplicate_element",
 		СпособыСопоставленияНативныхОшибок.ПрефиксОкончание(),
 		"",
 		"The global element '",
@@ -330,6 +502,7 @@
 
 	ДобавитьПравило(
 		Правила,
+		"zip.not_open",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"Архив не открыт",
@@ -344,6 +517,7 @@
 
 	ДобавитьПравило(
 		Правила,
+		"text.not_open",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Файл не открыт'; en = 'File is not open'",
@@ -353,6 +527,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"url.explicit_encoding_not_supported",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.NotSupportedException",
 		"",
@@ -362,6 +537,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"text.unknown_encoding.onescript",
 		СпособыСопоставленияНативныхОшибок.Префикс(),
 		"",
 		"ru = 'Неправильное имя кодировки'; en = 'Invalid encoding name'",
@@ -371,6 +547,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"text.unknown_encoding.dotnet",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.ArgumentException",
 		"",
@@ -386,6 +563,7 @@
 
 	ДобавитьПравило(
 		Правила,
+		"string.invalid_template",
 		СпособыСопоставленияНативныхОшибок.Префикс(),
 		"",
 		"ru = 'Ошибка синтаксиса шаблона в позиции '; en = 'Template syntax error at position '",
@@ -400,6 +578,18 @@
 
 	ДобавитьПравило(
 		Правила,
+		"binary.invalid_base64",
+		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		"System.FormatException",
+		"",
+		"The input is not a valid Base-64 string as it contains a non-base 64 character, "
+			+ "more than two padding characters, or an illegal character among the padding characters.",
+		КодыНативныхОшибок.ДвоичныеДанныеНекорректнаяBase64Строка(),
+		"ru = 'Некорректная строка Base64'; en = 'Invalid Base64 string'"
+	);
+	ДобавитьПравило(
+		Правила,
+		"binary.invalid_hex",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.FormatException",
 		"",
@@ -409,6 +599,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"binary.read_only",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Буфер находится в режиме ""Только чтение""'; en = 'Buffer is read-only'",
@@ -418,6 +609,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"binary.buffer_range.overflow",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.IndexOutOfRangeException",
 		"",
@@ -427,6 +619,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"binary.buffer_range.source",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.ArgumentException",
 		"",
@@ -438,6 +631,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"binary.buffer_range.destination",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.ArgumentException",
 		"",
@@ -454,6 +648,7 @@
 
 	ДобавитьПравило(
 		Правила,
+		"operation.not_supported",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.NotSupportedException",
 		"",
@@ -463,6 +658,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"operation.not_implemented",
 		СпособыСопоставленияНативныхОшибок.ПоТипу(),
 		"System.NotImplementedException",
 		"",
@@ -472,6 +668,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"number.overflow",
 		СпособыСопоставленияНативныхОшибок.ПоТипу(),
 		"System.OverflowException",
 		"",
@@ -481,6 +678,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"number.division_by_zero",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Деление на ноль'; en = 'Divide by zero'",
@@ -490,24 +688,29 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"type.conversion_failed.null_reference",
 		СпособыСопоставленияНативныхОшибок.ПрефиксОкончание(),
 		"",
 		"ru = '(null) Преобразование к типу '''; en = '(null) Conversion to type '''",
 		"ru = ' не поддерживается'; en = ' is not supported'",
-		КодыНативныхОшибок.ПреобразованиеТипаНеПоддерживается(),
-		"ru = 'Преобразование типа не поддерживается'; en = 'Type conversion is not supported'"
+		КодыНативныхОшибок.ОшибкаПреобразованияЗначения(),
+		"ru = 'Не удалось преобразовать значение к требуемому типу';"
+			+ "en = 'Failed to convert value to required type'"
 	);
 	ДобавитьПравило(
 		Правила,
+		"type.conversion_failed.value",
 		СпособыСопоставленияНативныхОшибок.ПрефиксОкончание(),
 		"",
 		"ru = 'Преобразование к типу '''; en = 'Conversion to type '''",
 		"ru = ' не поддерживается'; en = ' is not supported'",
-		КодыНативныхОшибок.ПреобразованиеТипаНеПоддерживается(),
-		"ru = 'Преобразование типа не поддерживается'; en = 'Type conversion is not supported'"
+		КодыНативныхОшибок.ОшибкаПреобразованияЗначения(),
+		"ru = 'Не удалось преобразовать значение к требуемому типу';"
+			+ "en = 'Failed to convert value to required type'"
 	);
 	ДобавитьПравило(
 		Правила,
+		"comparison.not_supported.ru",
 		СпособыСопоставленияНативныхОшибок.ПрефиксОкончание(),
 		"",
 		"ru = 'Сравнение на больше/меньше'",
@@ -517,46 +720,55 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"type.conversion_failed.undefined",
 		СпособыСопоставленияНативныхОшибок.ПрефиксИФрагмент(),
 		"",
 		"ru = 'OneScript.Values.BslUndefinedValue:'; en = 'OneScript.Values.BslUndefinedValue:'",
 		"",
-		КодыНативныхОшибок.ПреобразованиеТипаНеПоддерживается(),
-		"ru = 'Преобразование типа не поддерживается'; en = 'Type conversion is not supported'",
+		КодыНативныхОшибок.ОшибкаПреобразованияЗначения(),
+		"ru = 'Не удалось преобразовать значение к требуемому типу';"
+			+ "en = 'Failed to convert value to required type'",
 		"ru = 'Преобразование к типу '''; en = 'Conversion to type '''"
 	);
 	ДобавитьПравило(
 		Правила,
+		"type.conversion_failed.null",
 		СпособыСопоставленияНативныхОшибок.ПрефиксИФрагмент(),
 		"",
 		"ru = 'OneScript.Values.BslNullValue:'; en = 'OneScript.Values.BslNullValue:'",
 		"",
-		КодыНативныхОшибок.ПреобразованиеТипаНеПоддерживается(),
-		"ru = 'Преобразование типа не поддерживается'; en = 'Type conversion is not supported'",
+		КодыНативныхОшибок.ОшибкаПреобразованияЗначения(),
+		"ru = 'Не удалось преобразовать значение к требуемому типу';"
+			+ "en = 'Failed to convert value to required type'",
 		"ru = 'Преобразование к типу '''; en = 'Conversion to type '''"
 	);
 	ДобавитьПравило(
 		Правила,
+		"type.conversion_failed.type",
 		СпособыСопоставленияНативныхОшибок.ПрефиксИФрагмент(),
 		"",
 		"ru = 'OneScript.Values.BslTypeValue:'; en = 'OneScript.Values.BslTypeValue:'",
 		"",
-		КодыНативныхОшибок.ПреобразованиеТипаНеПоддерживается(),
-		"ru = 'Преобразование типа не поддерживается'; en = 'Type conversion is not supported'",
+		КодыНативныхОшибок.ОшибкаПреобразованияЗначения(),
+		"ru = 'Не удалось преобразовать значение к требуемому типу';"
+			+ "en = 'Failed to convert value to required type'",
 		"ru = 'Преобразование к типу '''; en = 'Conversion to type '''"
 	);
 	ДобавитьПравило(
 		Правила,
+		"type.conversion_failed.date",
 		СпособыСопоставленияНативныхОшибок.ПрефиксИФрагмент(),
 		"",
 		"ru = 'OneScript.Values.BslDateValue:'; en = 'OneScript.Values.BslDateValue:'",
 		"",
-		КодыНативныхОшибок.ПреобразованиеТипаНеПоддерживается(),
-		"ru = 'Преобразование типа не поддерживается'; en = 'Type conversion is not supported'",
+		КодыНативныхОшибок.ОшибкаПреобразованияЗначения(),
+		"ru = 'Не удалось преобразовать значение к требуемому типу';"
+			+ "en = 'Failed to convert value to required type'",
 		"ru = 'Преобразование к типу '''; en = 'Conversion to type '''"
 	);
 	ДобавитьПравило(
 		Правила,
+		"type.not_registered",
 		СпособыСопоставленияНативныхОшибок.ПрефиксОкончание(),
 		"",
 		"ru = 'Тип не зарегистрирован ('; en = 'Type is not registered ('",
@@ -566,6 +778,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"type.already_registered",
 		СпособыСопоставленияНативныхОшибок.ПрефиксОкончание(),
 		"",
 		"Type «",
@@ -575,6 +788,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"comparison.not_supported.en",
 		СпособыСопоставленияНативныхОшибок.Префикс(),
 		"",
 		"en = 'Greater-than/Less-than comparison operations are not supported'",
@@ -584,16 +798,19 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"type.conversion_failed.structure",
 		СпособыСопоставленияНативныхОшибок.ПрефиксОкончание(),
 		"",
 		"ru = 'OneScript.StandardLibrary.Collections.StructureImpl: Структура Преобразование к типу ''';"
 			+ "en = 'OneScript.StandardLibrary.Collections.StructureImpl: Структура Conversion to type '''",
 		"ru = ' не поддерживается'; en = ' is not supported'",
-		КодыНативныхОшибок.ПреобразованиеТипаНеПоддерживается(),
-		"ru = 'Преобразование типа не поддерживается'; en = 'Type conversion is not supported'"
+		КодыНативныхОшибок.ОшибкаПреобразованияЗначения(),
+		"ru = 'Не удалось преобразовать значение к требуемому типу';"
+			+ "en = 'Failed to convert value to required type'"
 	);
 	ДобавитьПравило(
 		Правила,
+		"object.method_not_found",
 		СпособыСопоставленияНативныхОшибок.ПрефиксОкончание(),
 		"",
 		"ru = 'Метод объекта не обнаружен ('; en = 'Method not found ('",
@@ -603,6 +820,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"object.value_required",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Значение не является значением объектного типа'; en = 'Value is not of object type'",
@@ -612,6 +830,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"argument.too_many",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Слишком много фактических параметров'; en = 'Too many arguments were passed'",
@@ -621,6 +840,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"argument.too_few",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Недостаточно фактических параметров'; en = 'Too few arguments were passed'",
@@ -630,6 +850,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"argument.mandatory_missing",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Пропущен обязательный параметр'; en = 'Missed mandatory argument'",
@@ -639,6 +860,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"argument.invalid_type.named",
 		СпособыСопоставленияНативныхОшибок.Префикс(),
 		"",
 		"ru = 'Неверный тип аргумента '''; en = 'Invalid type of argument '''",
@@ -648,6 +870,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"argument.invalid_type.numbered",
 		СпособыСопоставленияНативныхОшибок.Префикс(),
 		"",
 		"ru = 'Неверный тип аргумента номер '; en = 'Invalid type of argument number '",
@@ -657,6 +880,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"argument.invalid_value.generic",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Неверное значение аргумента'; en = 'Invalid argument value'",
@@ -666,6 +890,27 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"argument.invalid_value.stream_buffer_size",
+		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		"System.ArgumentOutOfRangeException",
+		"",
+		"Non-negative number required. (Parameter 'bufferSize')",
+		КодыНативныхОшибок.НедопустимоеЗначениеАргумента(),
+		"ru = 'Недопустимое значение аргумента'; en = 'Invalid argument value'"
+	);
+	ДобавитьПравило(
+		Правила,
+		"argument.invalid_value.xml_attribute_index",
+		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
+		"System.ArgumentOutOfRangeException",
+		"must be a non-negative value. (Parameter 'i')",
+		"",
+		КодыНативныхОшибок.НедопустимоеЗначениеАргумента(),
+		"ru = 'Недопустимое значение аргумента'; en = 'Invalid argument value'"
+	);
+	ДобавитьПравило(
+		Правила,
+		"argument.invalid_value.context_parameter",
 		СпособыСопоставленияНативныхОшибок.ПрефиксИФрагмент(),
 		"",
 		"ru = 'Ошибка при вызове метода контекста ('; en = 'Error calling context method ('",
@@ -676,6 +921,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"argument.invalid_value.named",
 		СпособыСопоставленияНативныхОшибок.Префикс(),
 		"",
 		"ru = 'Неверное значение аргумента '; en = 'Invalid argument value '",
@@ -685,6 +931,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"argument.invalid_value.named_en",
 		СпособыСопоставленияНативныхОшибок.Префикс(),
 		"",
 		"en = 'Invalid value for argument '",
@@ -694,6 +941,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"compilation.attached_script",
 		СпособыСопоставленияНативныхОшибок.Префикс(),
 		"",
 		"ru = 'Ошибка компиляции подключаемого сценария:'; en = 'Error compiling attached script:'",
@@ -703,6 +951,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"compilation.return_outside_method",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Оператор ""Возврат"" может использоваться только внутри метода';"
@@ -713,6 +962,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"compilation.module",
 		СпособыСопоставленияНативныхОшибок.Префикс(),
 		"",
 		"ru = 'Ошибка комиляции модуля'; en = 'Module compilation error'",
@@ -722,6 +972,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"argument.invalid_type.generic",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Неверный тип аргумента'; en = 'Invalid type of argument'",
@@ -731,6 +982,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"background_tasks.failed",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Задания завершились с ошибками'; en = 'Tasks are completed with errors'",
@@ -740,6 +992,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"constructor.type_not_defined",
 		СпособыСопоставленияНативныхОшибок.ПрефиксОкончание(),
 		"",
 		"ru = 'Тип не определен. Конструктор не найден ('; en = 'Type is not defined ('",
@@ -749,6 +1002,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"constructor.not_defined_with_arguments",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Конструктор не определен, но переданы параметры конструктора.';"
@@ -759,6 +1013,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"constructor.invalid_argument_count",
 		СпособыСопоставленияНативныхОшибок.Префикс(),
 		"",
 		"ru = 'Параметры конструктора: необходимых параметров:';"
@@ -770,6 +1025,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"date.invalid_components",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.ArgumentOutOfRangeException",
 		"",
@@ -780,6 +1036,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"collection.index_out_of_range",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Значение индекса выходит за пределы диапазона'; en = 'Index is out of range'",
@@ -789,6 +1046,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"collection.key_not_found",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"Значение, соответствующее ключу, не задано",
@@ -798,6 +1056,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"collection.foreign_element.value_list",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Элемент не принадлежит списку значений'; en = 'Element does not belong to values list'",
@@ -807,6 +1066,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"collection.foreign_element.value_table",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Строка не принадлежит таблице значений'; en = 'Row does not belong to table'",
@@ -816,6 +1076,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"collection.indexed_value_read_only",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Индексированное значение доступно только для чтения'; en = 'Indexed value is read-only'",
@@ -826,6 +1087,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"collection.invalid_constructor_argument",
 		СпособыСопоставленияНативныхОшибок.ПрефиксОкончание(),
 		"",
 		"В качестве параметра для конструктора можно передавать только ",
@@ -836,6 +1098,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"table.invalid_offset",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Неправильное смещение внутри коллекции'; en = 'Incorrect offset within collection'",
@@ -845,6 +1108,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"table.invalid_column_name",
 		СпособыСопоставленияНативныхОшибок.ПрефиксОкончание(),
 		"",
 		"ru = 'Неверное имя колонки '''; en = 'Wrong column name '''",
@@ -854,6 +1118,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"table.column_already_exists",
 		СпособыСопоставленияНативныхОшибок.ПрефиксОкончание(),
 		"",
 		"ru = 'Колонка '; en = 'Column '",
@@ -863,6 +1128,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"table.column_role_conflict",
 		СпособыСопоставленияНативныхОшибок.ПрефиксОкончание(),
 		"",
 		"ru = 'Колонка '; en = 'Column '",
@@ -872,6 +1138,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"object.property_not_found",
 		СпособыСопоставленияНативныхОшибок.ПрефиксОкончание(),
 		"",
 		"ru = 'Свойство объекта не обнаружено ('; en = 'Object property is not found ('",
@@ -881,6 +1148,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"object.property_not_writable",
 		СпособыСопоставленияНативныхОшибок.ПрефиксОкончание(),
 		"",
 		"ru = 'Свойство '; en = 'Property '",
@@ -890,6 +1158,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"object.property_not_readable",
 		СпособыСопоставленияНативныхОшибок.ПрефиксОкончание(),
 		"",
 		"ru = 'Свойство '; en = 'Property '",
@@ -899,6 +1168,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"object.invalid_property_name",
 		СпособыСопоставленияНативныхОшибок.Префикс(),
 		"",
 		"Задано неправильное имя атрибута структуры '",
@@ -913,6 +1183,7 @@
 
 	ДобавитьПравило(
 		Правила,
+		"http.custom_certificate_not_supported",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"Защищенное соединение по произвольным сертификатам не поддерживается."
@@ -924,6 +1195,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"http.timeout",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.Net.WebException",
 		"",
@@ -933,6 +1205,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"http.method_not_allowed",
 		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
 		"System.Net.WebException",
 		"The remote server returned an error: (405)",
@@ -942,6 +1215,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"proxy.authentication_required",
 		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
 		"System.Net.WebException",
 		"failed with status code '407'",
@@ -951,6 +1225,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"proxy.tunnel_failed",
 		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
 		"System.Net.WebException",
 		"The proxy tunnel request to proxy",
@@ -960,6 +1235,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"network.tls_handshake_failed",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.Net.WebException",
 		"",
@@ -973,6 +1249,18 @@
 
 	ДобавитьПравило(
 		Правила,
+		"network.address_in_use.socket",
+		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		"System.Net.Sockets.SocketException",
+		"",
+		"ru = 'Обычно разрешается только одно использование адреса сокета (протокол/сетевой адрес/порт).';"
+			+ "en = 'Only one usage of each socket address (protocol/network address/port) is normally permitted.'",
+		КодыНативныхОшибок.СетьАдресЗанят(),
+		"ru = 'Сетевой адрес уже используется'; en = 'Network address is already in use'"
+	);
+	ДобавитьПравило(
+		Правила,
+		"network.host_not_found",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.Net.Sockets.SocketException",
 		"",
@@ -982,6 +1270,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"network.connection_refused",
 		СпособыСопоставленияНативныхОшибок.ТипИОбрамление(),
 		"System.Net.Sockets.SocketException",
 		"ru = 'Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.';"
@@ -992,6 +1281,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"network.connection_reset",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.Net.Sockets.SocketException",
 		"",
@@ -1003,6 +1293,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"http.incomplete_response.content_length",
 		СпособыСопоставленияНативныхОшибок.ТипИОбрамление(),
 		"System.Net.Http.HttpIOException",
 		"The response ended prematurely, with at least",
@@ -1012,6 +1303,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"http.incomplete_response.chunked",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.Net.Http.HttpIOException",
 		"",
@@ -1021,6 +1313,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"http.invalid_method",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.ArgumentException",
 		"",
@@ -1037,6 +1330,7 @@
 
 	ДобавитьПравило(
 		Правила,
+		"network.address_in_use.web_server",
 		СпособыСопоставленияНативныхОшибок.ТипИОбрамление(),
 		"System.IO.IOException",
 		"Failed to bind to address ",
@@ -1046,6 +1340,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"network.invalid_port",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.ArgumentOutOfRangeException",
 		"",
@@ -1055,6 +1350,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"network.invalid_ip_address",
 		СпособыСопоставленияНативныхОшибок.Префикс(),
 		"",
 		"ru = 'Ошибка разбора IP адреса: '; en = 'Failed to parse IP address: '",
@@ -1072,6 +1368,7 @@
 
 	ДобавитьПравило(
 		Правила,
+		"http.invalid_response.status_line",
 		СпособыСопоставленияНативныхОшибок.ТипИОбрамление(),
 		"System.Net.WebException",
 		"Received an invalid status line:",
@@ -1081,6 +1378,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"http.invalid_response.status_code",
 		СпособыСопоставленияНативныхОшибок.ТипИОбрамление(),
 		"System.Net.WebException",
 		"Received an invalid status code:",
@@ -1090,6 +1388,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"http.invalid_response.header_name",
 		СпособыСопоставленияНативныхОшибок.ТипИОбрамление(),
 		"System.Net.WebException",
 		"Received an invalid header name:",
@@ -1099,6 +1398,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"http.invalid_response.header_line",
 		СпособыСопоставленияНативныхОшибок.ТипИОбрамление(),
 		"System.Net.WebException",
 		"Received an invalid header line:",
@@ -1108,6 +1408,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"http.invalid_response.chunk_length",
 		СпособыСопоставленияНативныхОшибок.ТипИОбрамление(),
 		"System.Net.Http.HttpIOException",
 		"Received chunk header length could not be parsed:",
@@ -1117,6 +1418,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"http.invalid_response.chunk_terminator",
 		СпособыСопоставленияНативныхОшибок.ТипИОбрамление(),
 		"System.Net.Http.HttpIOException",
 		"Received an invalid chunk terminator:",
@@ -1130,10 +1432,11 @@
 Процедура ДобавитьПравилаHTTPЗаголовков(Правила)
 
 	КодОшибки = КодыНативныхОшибок.HTTPНекорректныйЗаголовок();
-	Сообщение = "ru = 'Некорректный HTTP-заголовок'; en = 'Invalid HTTP header'";
+	Сообщение = "ru = 'Недопустимый HTTP-заголовок'; en = 'Invalid HTTP header'";
 
 	ДобавитьПравило(
 		Правила,
+		"http.invalid_header.content_length",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Заголовок Content-Length задан неправильно'; en = 'Header Content-Length is invalid'",
@@ -1143,6 +1446,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"http.invalid_header.date",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Заголовок Date задан неправильно'; en = 'Header Date is invalid'",
@@ -1152,6 +1456,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"http.invalid_header.if_modified_since",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Заголовок If-Modified-Since задан неправильно'; en = 'Header If-Modified-Since is invalid'",
@@ -1161,6 +1466,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"http.invalid_header.range",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
 		"ru = 'Заголовок Range задан неправильно'; en = 'Header Range is invalid'",
@@ -1170,6 +1476,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"http.invalid_header.transfer_encoding",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.ArgumentException",
 		"",
@@ -1179,6 +1486,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"http.invalid_header.connection",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.ArgumentException",
 		"",
@@ -1188,6 +1496,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"http.invalid_header.host",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.ArgumentException",
 		"",
@@ -1202,6 +1511,7 @@
 
 	ДобавитьПравило(
 		Правила,
+		"com.active_object_not_supported",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.NotSupportedException",
 		"",
@@ -1217,6 +1527,7 @@
 
 	ДобавитьПравило(
 		Правила,
+		"component.invalid_format",
 		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
 		"System.BadImageFormatException",
 		"Bad IL format. The format of the file",
@@ -1227,6 +1538,7 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"component.creation_failed",
 		СпособыСопоставленияНативныхОшибок.ПрефиксИФрагмент(),
 		"",
 		"Не удалось создать объект `",
@@ -1241,6 +1553,7 @@
 
 Процедура ДобавитьПравило(
 	Правила,
+	Идентификатор,
 	Способ,
 	НативныйТип,
 	Начало,
@@ -1271,7 +1584,7 @@
 		Префикс,
 		Фрагмент,
 		Окончание,
-		СтрШаблон("builtin.%1", Правила.Количество() + 1)
+		Идентификатор
 	);
 
 	Правила.Добавить(Правило);
