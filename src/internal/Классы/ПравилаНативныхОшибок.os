@@ -910,6 +910,16 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"argument.invalid_value.format_index",
+		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		"System.ArgumentOutOfRangeException",
+		"",
+		"Specified argument was out of the range of valid values. (Parameter 'index')",
+		КодыНативныхОшибок.НедопустимоеЗначениеАргумента(),
+		"ru = 'Недопустимое значение аргумента'; en = 'Invalid argument value'"
+	);
+	ДобавитьПравило(
+		Правила,
 		"argument.invalid_value.context_parameter",
 		СпособыСопоставленияНативныхОшибок.ПрефиксИФрагмент(),
 		"",
