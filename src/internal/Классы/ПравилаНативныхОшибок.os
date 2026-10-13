@@ -1312,7 +1312,7 @@
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.Net.Sockets.SocketException",
 		"",
-		"en = 'Address already in use.'",
+		"en = 'Address already in use'",
 		КодыНативныхОшибок.СетьАдресЗанят(),
 		"ru = 'Сетевой адрес уже используется'; en = 'Network address is already in use'"
 	);
