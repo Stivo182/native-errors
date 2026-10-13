@@ -110,10 +110,6 @@
 	Описания.Добавить("External exception (System.ArgumentException): "
 		+ "Non-negative number required. (Parameter 'bufferSize')");
 	Описания.Добавить("External exception (System.ArgumentOutOfRangeException): "
-		+ "Non-negative number required. (Parameter 'length')");
-	Описания.Добавить("External exception (System.ArgumentOutOfRangeException): "
-		+ "Non-negative number required. (Parameter 'bufferSizeExtra')");
-	Описания.Добавить("External exception (System.ArgumentOutOfRangeException): "
 		+ "Positive number required. (Parameter 'bufferSize')");
 
 	// Действие и Проверка
@@ -653,7 +649,7 @@
 КонецФункции
 
 &ОжидаемыйКодОшибки("НедопустимоеЗначениеАргумента")
-&ОжидаемоеПравилоОшибки("argument.invalid_value.stream_capacity")
+&ОжидаемоеПравилоОшибки("argument.invalid_value.non_negative")
 Функция ПолучитьОшибкуОтрицательнойЕмкостиПотокаВПамяти() Экспорт
 
 	// Действие

@@ -24,6 +24,7 @@
 	ДобавитьПравилаВебСервера(Правила);
 	ДобавитьПравилаВнешнихКомпонент(Правила);
 	ДобавитьПравилаCOM(Правила);
+	ДобавитьПравилаКонсоли(Правила);
 
 	_Правила = Новый ФиксированныйМассив(Правила);
 
@@ -250,12 +251,12 @@
 	ДобавитьПравило(
 		Правила,
 		"stream.buffer_range",
-		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
 		"System.ArgumentOutOfRangeException",
-		"",
 		"ru = 'Смещение и длина находились вне границ массива.';"
 			+ "en = 'Offset and length were out of bounds for the array or count is greater than the number "
-			+ "of elements from index to the end of the source collection. (Parameter ''count'')'",
+			+ "of elements from index to the end of the source collection.'",
+		"",
 		КодыНативныхОшибок.ПотокВыходЗаГраницыБуфера(),
 		"ru = 'Диапазон буфера выходит за допустимые границы';"
 			+ "en = 'Buffer range is outside the allowed bounds'"
@@ -271,6 +272,35 @@
 		"ru = 'Поток не поддерживает таймауты'; en = 'Stream does not support timeouts'"
 	);
 
+КонецПроцедуры
+
+Процедура ДобавитьПравилаКонсоли(Правила)
+
+	СообщениеЧтенияКлавиши = "Cannot read keys when either application does not have a console "
+		+ "or when console input has been redirected.";
+	СообщениеПроверкиКлавиши = "Cannot see if a key has been pressed when either application does not have a "
+		+ "console or when console input has been redirected from a file.";
+
+	ДобавитьПравило(
+		Правила,
+		"console.unavailable.read_key",
+		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
+		"System.InvalidOperationException",
+		СообщениеЧтенияКлавиши,
+		"",
+		КодыНативныхОшибок.КонсольНедоступна(),
+		"ru = 'Системная консоль недоступна'; en = 'System console is unavailable'"
+	);
+	ДобавитьПравило(
+		Правила,
+		"console.unavailable.key_available",
+		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
+		"System.InvalidOperationException",
+		СообщениеПроверкиКлавиши,
+		"",
+		КодыНативныхОшибок.КонсольНедоступна(),
+		"ru = 'Системная консоль недоступна'; en = 'System console is unavailable'"
+	);
 КонецПроцедуры
 
 Процедура ДобавитьПравилаJSON(Правила)
@@ -587,11 +617,11 @@
 	ДобавитьПравило(
 		Правила,
 		"text.unknown_encoding.dotnet",
-		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
 		"System.ArgumentException",
-		"",
 		"' is not a supported encoding name. For information on defining a custom encoding,"
-			+ " see the documentation for the Encoding.RegisterProvider method. (Parameter 'name')",
+			+ " see the documentation for the Encoding.RegisterProvider method.",
+		"",
 		КодыНативныхОшибок.ТекстоваяКодировкаНеизвестна(),
 		"ru = 'Неизвестная кодировка текста'; en = 'Unknown text encoding'"
 	);
@@ -674,24 +704,24 @@
 	ДобавитьПравило(
 		Правила,
 		"binary.buffer_range.source",
-		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
 		"System.ArgumentException",
-		"",
 		"ru = 'Исходный массив недостаточно длинный.';"
 			+ "en = 'Source array was not long enough. Check the source index, length, "
-			+ "and the array''s lower bounds. (Parameter ''sourceArray'')'",
+			+ "and the array''s lower bounds.'",
+		"",
 		КодыНативныхОшибок.ДвоичныеДанныеВыходЗаГраницыБуфера(),
 		"ru = 'Операция выходит за границы двоичного буфера'; en = 'Operation exceeds binary buffer bounds'"
 	);
 	ДобавитьПравило(
 		Правила,
 		"binary.buffer_range.destination",
-		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
 		"System.ArgumentException",
-		"",
 		"ru = 'Конечный массив недостаточно длинный.';"
 			+ "en = 'Destination array was not long enough. Check the destination index, length, "
-			+ "and the array''s lower bounds. (Parameter ''destinationArray'')'",
+			+ "and the array''s lower bounds.'",
+		"",
 		КодыНативныхОшибок.ДвоичныеДанныеВыходЗаГраницыБуфера(),
 		"ru = 'Операция выходит за границы двоичного буфера'; en = 'Operation exceeds binary buffer bounds'"
 	);
@@ -934,6 +964,16 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"argument.invalid_type.background_task",
+		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
+		"System.InvalidCastException",
+		"ru = 'OneScript.StandardLibrary.Tasks.BackgroundTask'; en = 'OneScript.StandardLibrary.Tasks.BackgroundTask'",
+		"",
+		КодыНативныхОшибок.НедопустимыйТипАргумента(),
+		"ru = 'Недопустимый тип аргумента'; en = 'Invalid argument type'"
+	);
+	ДобавитьПравило(
+		Правила,
 		"argument.invalid_value.generic",
 		СпособыСопоставленияНативныхОшибок.Точное(),
 		"",
@@ -944,10 +984,30 @@
 	);
 	ДобавитьПравило(
 		Правила,
-		"argument.invalid_value.http_content_length",
+		"argument.invalid_value.timezone_gmt_number",
+		СпособыСопоставленияНативныхОшибок.ТипИОбрамление(),
+		"System.FormatException",
+		"The input string '",
+		"' was not in a correct format.",
+		КодыНативныхОшибок.НедопустимоеЗначениеАргумента(),
+		"ru = 'Недопустимое значение аргумента'; en = 'Invalid argument value'"
+	);
+	ДобавитьПравило(
+		Правила,
+		"argument.invalid_value.non_negative",
 		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
 		"System.ArgumentOutOfRangeException",
-		"must be a non-negative value. (Parameter 'value')",
+		"must be a non-negative value.",
+		"",
+		КодыНативныхОшибок.НедопустимоеЗначениеАргумента(),
+		"ru = 'Недопустимое значение аргумента'; en = 'Invalid argument value'"
+	);
+	ДобавитьПравило(
+		Правила,
+		"argument.invalid_value.xml_schema_writer",
+		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
+		"System.ArgumentNullException",
+		"Value cannot be null.",
 		"",
 		КодыНативныхОшибок.НедопустимоеЗначениеАргумента(),
 		"ru = 'Недопустимое значение аргумента'; en = 'Invalid argument value'"
@@ -955,29 +1015,9 @@
 	ДобавитьПравило(
 		Правила,
 		"argument.invalid_value.stream_buffer_size",
-		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
-		"System.ArgumentOutOfRangeException",
-		"",
-		"Non-negative number required. (Parameter 'bufferSize')",
-		КодыНативныхОшибок.НедопустимоеЗначениеАргумента(),
-		"ru = 'Недопустимое значение аргумента'; en = 'Invalid argument value'"
-	);
-	ДобавитьПравило(
-		Правила,
-		"argument.invalid_value.stream_capacity",
 		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
 		"System.ArgumentOutOfRangeException",
-		"must be a non-negative value. (Parameter 'capacity')",
-		"",
-		КодыНативныхОшибок.НедопустимоеЗначениеАргумента(),
-		"ru = 'Недопустимое значение аргумента'; en = 'Invalid argument value'"
-	);
-	ДобавитьПравило(
-		Правила,
-		"argument.invalid_value.xml_attribute_index",
-		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
-		"System.ArgumentOutOfRangeException",
-		"must be a non-negative value. (Parameter 'i')",
+		"Non-negative number required.",
 		"",
 		КодыНативныхОшибок.НедопустимоеЗначениеАргумента(),
 		"ru = 'Недопустимое значение аргумента'; en = 'Invalid argument value'"
@@ -995,10 +1035,10 @@
 	ДобавитьПравило(
 		Правила,
 		"argument.invalid_value.drive_name",
-		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
 		"System.ArgumentException",
+		"Drive name must be a root directory (i.e. 'C:\') or a drive letter ('C').",
 		"",
-		"Drive name must be a root directory (i.e. 'C:\') or a drive letter ('C'). (Parameter 'driveName')",
 		КодыНативныхОшибок.НедопустимоеЗначениеАргумента(),
 		"ru = 'Недопустимое значение аргумента'; en = 'Invalid argument value'"
 	);
@@ -1015,21 +1055,20 @@
 	ДобавитьПравило(
 		Правила,
 		"argument.invalid_value.list_index_bounds",
-		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
 		"System.ArgumentOutOfRangeException",
+		"Index must be within the bounds of the List.",
 		"",
-		"Index must be within the bounds of the List. (Parameter 'index')",
 		КодыНативныхОшибок.НедопустимоеЗначениеАргумента(),
 		"ru = 'Недопустимое значение аргумента'; en = 'Invalid argument value'"
 	);
 	ДобавитьПравило(
 		Правила,
 		"argument.invalid_value.collection_index_bounds",
-		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
 		"System.ArgumentOutOfRangeException",
+		"Index was out of range. Must be non-negative and less than the size of the collection.",
 		"",
-		"Index was out of range. Must be non-negative and less than the size of the collection. "
-			+ "(Parameter 'index')",
 		КодыНативныхОшибок.НедопустимоеЗначениеАргумента(),
 		"ru = 'Недопустимое значение аргумента'; en = 'Invalid argument value'"
 	);
@@ -1283,6 +1322,16 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"object.property_not_writable.console_global",
+		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		"System.InvalidOperationException",
+		"",
+		"Can't assign to global property Console",
+		КодыНативныхОшибок.СвойствоОбъектаНедоступноДляЗаписи(),
+		"ru = 'Свойство объекта недоступно для записи'; en = 'Object property is not writable'"
+	);
+	ДобавитьПравило(
+		Правила,
 		"object.property_not_readable",
 		СпособыСопоставленияНативныхОшибок.ПрефиксОкончание(),
 		"",
@@ -1479,10 +1528,10 @@
 	ДобавитьПравило(
 		Правила,
 		"http.invalid_method",
-		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
 		"System.ArgumentException",
+		"Cannot set null or blank methods on request.",
 		"",
-		"Cannot set null or blank methods on request. (Parameter 'value')",
 		КодыНативныхОшибок.HTTPНекорректныйМетод(),
 		"ru = 'Некорректный HTTP-метод'; en = 'Invalid HTTP method'"
 	);
@@ -1642,30 +1691,30 @@
 	ДобавитьПравило(
 		Правила,
 		"http.invalid_header.transfer_encoding",
-		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
 		"System.ArgumentException",
+		"Chunked encoding must be set via the SendChunked property.",
 		"",
-		"Chunked encoding must be set via the SendChunked property. (Parameter 'value')",
 		КодОшибки,
 		Сообщение
 	);
 	ДобавитьПравило(
 		Правила,
 		"http.invalid_header.connection",
-		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
 		"System.ArgumentException",
+		"Keep-Alive and Close may not be set using this property.",
 		"",
-		"Keep-Alive and Close may not be set using this property. (Parameter 'value')",
 		КодОшибки,
 		Сообщение
 	);
 	ДобавитьПравило(
 		Правила,
 		"http.invalid_header.host",
-		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
 		"System.ArgumentException",
+		"The specified value is not a valid Host header string.",
 		"",
-		"The specified value is not a valid Host header string. (Parameter 'value')",
 		КодОшибки,
 		Сообщение
 	);
