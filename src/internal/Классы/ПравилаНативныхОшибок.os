@@ -1308,6 +1308,16 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"network.address_in_use.socket_unix",
+		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		"System.Net.Sockets.SocketException",
+		"",
+		"en = 'Address already in use.'",
+		КодыНативныхОшибок.СетьАдресЗанят(),
+		"ru = 'Сетевой адрес уже используется'; en = 'Network address is already in use'"
+	);
+	ДобавитьПравило(
+		Правила,
 		"network.host_not_found",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.Net.Sockets.SocketException",
