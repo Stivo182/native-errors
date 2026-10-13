@@ -1318,6 +1318,26 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"network.host_not_found.web_exception_linux",
+		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
+		"System.Net.WebException",
+		"en = 'Name or service not known'",
+		"",
+		КодыНативныхОшибок.СетьОшибкаРазрешенияИмениУзла(),
+		"ru = 'Не удалось разрешить имя сетевого узла'; en = 'Network host name resolution failed'"
+	);
+	ДобавитьПравило(
+		Правила,
+		"network.host_not_found.web_exception_macos",
+		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
+		"System.Net.WebException",
+		"en = 'nodename nor servname provided, or not known'",
+		"",
+		КодыНативныхОшибок.СетьОшибкаРазрешенияИмениУзла(),
+		"ru = 'Не удалось разрешить имя сетевого узла'; en = 'Network host name resolution failed'"
+	);
+	ДобавитьПравило(
+		Правила,
 		"network.connection_refused",
 		СпособыСопоставленияНативныхОшибок.ТипИОбрамление(),
 		"System.Net.Sockets.SocketException",
