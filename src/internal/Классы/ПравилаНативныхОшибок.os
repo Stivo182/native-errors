@@ -944,11 +944,31 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"argument.invalid_value.http_content_length",
+		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
+		"System.ArgumentOutOfRangeException",
+		"must be a non-negative value. (Parameter 'value')",
+		"",
+		КодыНативныхОшибок.НедопустимоеЗначениеАргумента(),
+		"ru = 'Недопустимое значение аргумента'; en = 'Invalid argument value'"
+	);
+	ДобавитьПравило(
+		Правила,
 		"argument.invalid_value.stream_buffer_size",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.ArgumentOutOfRangeException",
 		"",
 		"Non-negative number required. (Parameter 'bufferSize')",
+		КодыНативныхОшибок.НедопустимоеЗначениеАргумента(),
+		"ru = 'Недопустимое значение аргумента'; en = 'Invalid argument value'"
+	);
+	ДобавитьПравило(
+		Правила,
+		"argument.invalid_value.stream_capacity",
+		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
+		"System.ArgumentOutOfRangeException",
+		"must be a non-negative value. (Parameter 'capacity')",
+		"",
 		КодыНативныхОшибок.НедопустимоеЗначениеАргумента(),
 		"ru = 'Недопустимое значение аргумента'; en = 'Invalid argument value'"
 	);
@@ -969,6 +989,47 @@
 		"System.ArgumentOutOfRangeException",
 		"",
 		"Specified argument was out of the range of valid values. (Parameter 'index')",
+		КодыНативныхОшибок.НедопустимоеЗначениеАргумента(),
+		"ru = 'Недопустимое значение аргумента'; en = 'Invalid argument value'"
+	);
+	ДобавитьПравило(
+		Правила,
+		"argument.invalid_value.drive_name",
+		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		"System.ArgumentException",
+		"",
+		"Drive name must be a root directory (i.e. 'C:\') or a drive letter ('C'). (Parameter 'driveName')",
+		КодыНативныхОшибок.НедопустимоеЗначениеАргумента(),
+		"ru = 'Недопустимое значение аргумента'; en = 'Invalid argument value'"
+	);
+	ДобавитьПравило(
+		Правила,
+		"argument.invalid_value.guid_format",
+		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		"System.FormatException",
+		"",
+		"Unrecognized Guid format.",
+		КодыНативныхОшибок.НедопустимоеЗначениеАргумента(),
+		"ru = 'Недопустимое значение аргумента'; en = 'Invalid argument value'"
+	);
+	ДобавитьПравило(
+		Правила,
+		"argument.invalid_value.list_index_bounds",
+		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		"System.ArgumentOutOfRangeException",
+		"",
+		"Index must be within the bounds of the List. (Parameter 'index')",
+		КодыНативныхОшибок.НедопустимоеЗначениеАргумента(),
+		"ru = 'Недопустимое значение аргумента'; en = 'Invalid argument value'"
+	);
+	ДобавитьПравило(
+		Правила,
+		"argument.invalid_value.collection_index_bounds",
+		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
+		"System.ArgumentOutOfRangeException",
+		"",
+		"Index was out of range. Must be non-negative and less than the size of the collection. "
+			+ "(Parameter 'index')",
 		КодыНативныхОшибок.НедопустимоеЗначениеАргумента(),
 		"ru = 'Недопустимое значение аргумента'; en = 'Invalid argument value'"
 	);
