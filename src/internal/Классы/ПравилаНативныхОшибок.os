@@ -1329,6 +1329,16 @@
 	);
 	ДобавитьПравило(
 		Правила,
+		"network.connection_refused.web_exception",
+		СпособыСопоставленияНативныхОшибок.ТипИФрагмент(),
+		"System.Net.WebException",
+		"en = 'Connection refused'",
+		"",
+		КодыНативныхОшибок.СетьСоединениеОтклонено(),
+		"ru = 'Сетевое соединение отклонено'; en = 'Network connection was refused'"
+	);
+	ДобавитьПравило(
+		Правила,
 		"network.connection_reset",
 		СпособыСопоставленияНативныхОшибок.ТипИОкончание(),
 		"System.Net.Sockets.SocketException",
