@@ -1205,6 +1205,19 @@
 	);
 	Правила.Добавить(
 		Новый ПравилоКлассификацииОшибок()
+			.СНативнымТипом("System.ArgumentOutOfRangeException")
+			.ОканчиваетсяНа(
+				"The added or subtracted value results in an un-representable DateTime. (Parameter 'months')"
+			)
+			.СИдентификатором("date.out_of_range.add_month")
+			.КлассифицируетКак(
+				КодыНативныхОшибок.ДатаВнеДиапазона(),
+				"ru = 'Сдвиг даты выводит ее за поддерживаемый диапазон'; "
+				+ "en = 'Date shift results in an un-representable DateTime'"
+			)
+	);
+	Правила.Добавить(
+		Новый ПравилоКлассификацииОшибок()
 			.СовпадаетС("ru = 'Значение индекса выходит за пределы диапазона'; en = 'Index is out of range'")
 			.СИдентификатором("collection.index_out_of_range")
 			.КлассифицируетКак(
